@@ -1,0 +1,305 @@
+" Don't be compatible with simple vi
+set nocompatible
+
+" Automatically source this file on changes
+augroup autosourcing
+    autocmd!
+    autocmd BufWritePost init.vim source %
+augroup END
+
+" Plugin manager (vim-plug)
+" Autoload vim-plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+" Plugins
+call plug#begin(stdpath('data') . '/plugged')
+
+Plug 'kyazdani42/nvim-tree.lua'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+
+Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'godlygeek/tabular'
+
+Plug 'vimwiki/vimwiki'
+
+" Scrollbar/sidebar
+Plug 'petertriho/nvim-scrollbar'
+Plug 'kevinhwang91/nvim-hlslens'
+Plug 'vim-syntastic/syntastic'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'preservim/tagbar'
+Plug 'rinx/nvim-minimap'
+
+" Autocomplete parentheses and quotation marks
+Plug 'cohama/lexima.vim'
+" Plug 'luochen1990/rainbow'
+Plug 'b3nj5m1n/kommentary'
+Plug 'vim-scripts/HTML-AutoCloseTag'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'p00f/nvim-ts-rainbow'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/refactoring.nvim'
+" Themes
+Plug 'sainnhe/everforest'
+Plug 'sainnhe/gruvbox-material'
+
+" Syntax
+Plug 'kergoth/vim-bitbake'
+Plug 'fladson/vim-kitty'
+
+call plug#end()
+
+" -------- General settings --------
+" Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+" If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+" (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+    if (has("nvim"))
+      "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+      let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    endif
+    "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+    "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+    " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+    if (has("termguicolors"))
+      set termguicolors
+    endif
+endif
+let ayucolor = "dark"
+let g:gruvbox_contrast_dark = "hard"
+let g:everforest_background         = "hard"
+let g:everforest_better_performance = '1'
+let g:everforest_ui_contrast        = 'high'
+let g:gruvbox_material_background   = "hard"
+let g:gruvbox_material_foreground   = "mix"
+let g:gruvbox_material_enable_bold  = '1'
+colorscheme everforest
+
+set backspace=indent,eol,start
+set ruler
+set number
+set incsearch
+set hlsearch
+set ignorecase
+" set cursorline
+set colorcolumn=73,80
+set list
+set listchars=tab:»\ \|,space:·
+" hi clear SignColumn
+" space indentation, spaces at 4 tabs
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set noswapfile
+set hidden
+set updatetime=300
+set cindent
+set title
+
+syntax on
+
+set mouse=a
+
+" Splits
+set splitbelow
+set splitright
+
+" Easier window movement
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <silent> <F5> :tabprevious<CR>
+nnoremap <silent> <F6> :tabnext<CR>
+nnoremap <F7> :Buffers<CR>
+
+" Buffer management
+" nnoremap <Leader>b :buffers<CR>:buffer<Space>
+nnoremap <Leader>b :Buffers<CR>
+
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
+
+" " Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+" Trim whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Easy config edit
+nnoremap <silent> <F2> :split ~/.config/nvim/init.vim<CR>
+
+" -------- Plugin settings --------
+nnoremap <silent> <leader>p :PlugInstall<CR>
+
+" ----- scrooloose/syntastic settings -----
+
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
+let b:syntastic_mode = "passive"
+let g:syntastic_cpp_remove_include_errors = "1"
+" augroup mySyntastic
+"     au!
+"    au FileType tex let b:syntastic_mode = \"passive"
+" augroup END
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" ---- lualine ----
+lua << EOF
+require('lualine').setup {
+  options = {
+    disabled_filetypes = {'minimap', 'NvimTree', 'Tagbar'},
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+
+  },
+  tabline = {
+    lualine_a = {'buffers'},
+    lualine_b = {'branch'},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {'tabs'}
+  },
+  extensions = {}
+}
+EOF
+
+" ---- NVim Tree ----
+lua << EOF
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+EOF
+nmap <silent> <leader>t :NvimTreeToggle<CR>
+nnoremap <C-f> :NvimTreeFindFile<CR>
+
+" ---- tagbar ----
+nmap <silent> <F8> :TagbarOpenAutoClose<CR>
+
+" ---- scrollbar ----
+lua << EOF
+require("scrollbar.handlers.search").setup()
+require("scrollbar").setup()
+EOF
+
+" ---- CrtlP ----
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" ---- Rainbow ----
+let g:rainbow_active = 1
+nmap <silent> <leader>r :TSBufToggle rainbow<CR>
+
+" --- kommentary ---
+lua << EOF
+require('kommentary.config').use_extended_mappings()
+EOF
+
+" --- nvim-treesitter ---
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+  rainbow = {
+    enable = false,
+    -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    -- colors = {}, -- table of hex strings
+    -- termcolors = {} -- table of colour name strings
+  }
+}
+EOF
+
+" --- refactoring --- "
+lua << EOF
+require('refactoring').setup({
+    prompt_func_return_type = {
+        go = false,
+        java = false,
+
+        cpp = false,
+        c = false,
+        h = false,
+        hpp = false,
+        cxx = false,
+    },
+    prompt_func_param_type = {
+        go = false,
+        java = false,
+
+        cpp = false,
+        c = false,
+        h = false,
+        hpp = false,
+        cxx = false,
+    },
+    printf_statements = {},
+    print_var_statements = {},
+})
+-- Remaps for the refactoring operations currently offered by the plugin
+vim.api.nvim_set_keymap("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+
+
+-- Remap in normal mode and passing { normal = true } will automatically find the variable under the cursor and print it
+vim.api.nvim_set_keymap("n", "<leader>rv", ":lua require('refactoring').debug.print_var({ normal = true })<CR>", { noremap = true })
+-- Remap in visual mode will print whatever is in the visual selection
+vim.api.nvim_set_keymap("v", "<leader>rv", ":lua require('refactoring').debug.print_var({})<CR>", { noremap = true })
+
+-- Cleanup function: this remap should be made in normal mode
+vim.api.nvim_set_keymap("n", "<leader>rc", ":lua require('refactoring').debug.cleanup({})<CR>", { noremap = true })
+
+EOF
