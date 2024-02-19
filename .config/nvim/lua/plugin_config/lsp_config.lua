@@ -10,7 +10,7 @@ require("mason-lspconfig").setup({
 		"pylsp", -- python
 		-- php
 		-- javascript?
-		"openscad_lsp", -- openscad
+		-- "openscad_lsp", -- openscad
 	}
 })
 
@@ -47,6 +47,10 @@ require("lspconfig").lua_ls.setup {
 }
 
 
+-- require("lspconfig").intelephense.setup {
+-- 	on_attach = attach_fn,
+-- }
+
 require("lspconfig").clangd.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -54,5 +58,22 @@ require("lspconfig").clangd.setup {
 
 require("lspconfig").bashls.setup {
 	on_attach = on_attach,
-	capabilities = capabilities,
+	-- capabilities = require("lspconfig").bashls.default_capabilities(),
+}
+
+require("lspconfig").pylsp.setup {
+	-- on_attach = attach_fn,
+	-- capabilities = require('pylsp').default_capabilities(),
+    settings = {
+        plugins = {
+            pylint = {
+                enabled = false,
+                ignore = {'E501', 'E231', 'E266'},
+            },
+            pycodestyle = {
+                enabled = false,
+                ignore = {'E501', 'E231', 'E266'},
+            }
+        }
+    }
 }

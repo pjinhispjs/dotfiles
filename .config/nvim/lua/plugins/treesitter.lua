@@ -4,12 +4,13 @@ return {
 	{ "nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			{ "p00f/nvim-ts-rainbow" },
+			{ "nvim-treesitter/nvim-treesitter-context" },
 		},
 		config = function()
 			vim.cmd("TSUpdate")
 			require'nvim-treesitter.configs'.setup {
 				-- A list of parser names, or "all" (the five listed parsers should always be installed)
-				ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "query" },
+				ensure_installed = { "c", "cpp", "lua", "php", "vim", "vimdoc", "query" },
 				highlight = {
 					enable = true,
 					-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -23,6 +24,9 @@ return {
 					extended_mode = true,
 				},
 				treesitter_language_injections = true,
+			}
+			require'treesitter-context'.setup {
+				enable = true,
 			}
 		end,
 	},
