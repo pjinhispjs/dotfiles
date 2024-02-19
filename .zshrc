@@ -77,6 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+# NOTE zsh-syntax-highlighting must be sourced last
 plugins=(git alias-finder pj command-not-found)
 
 source $ZSH/oh-my-zsh.sh
@@ -84,6 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
+# source /etc/zsh_command_not_found
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -110,15 +112,33 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias l='ls -1'
+alias cls='clear'
+alias gh='git log HEAD~1..HEAD --pretty=format:%H'
+alias vim="nvim"
+# alias ssh='alacritty -e ssh'
 
 # Definition for pj (project jump) plugin
-PROJECT_PATHS=(~/Software /media/pj/SSD1/devel)
+PROJECT_PATHS=(~/Software /media/pj/SSD1/devel /media/pj/SSD/devel ~/devel)
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # tmuxifier
 export PATH="$HOME/.tmuxifier/bin:$PATH"
+
+fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 # zoxide - better cd
 eval "$(zoxide init zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+PATH="/home/pj/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/pj/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/pj/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/pj/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/pj/perl5"; export PERL_MM_OPT;
+
+source /home/pj/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
