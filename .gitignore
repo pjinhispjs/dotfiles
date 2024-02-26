@@ -1,3 +1,6 @@
 # state-holding files for nvim
 .config/nvim/lazy-lock.json
 .config/nvim/spell/*.spl
+
+# btop log
+.config/btop/btop.log
