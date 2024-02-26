@@ -27,9 +27,11 @@ vim.api.nvim_set_keymap("", "<C-l>", "<C-w>l", {noremap = true, desc = "Select w
 vim.api.nvim_set_keymap("n", "<leader>nn", "<cmd>lua vim.opt.number = not(vim.opt.number:get())<cr>", {desc = "Toggle line numbers"})
 vim.api.nvim_set_keymap("n", "<leader>nr", "<cmd>lua vim.opt.relativenumber = not(vim.opt.relativenumber:get())<cr>", {desc = "Toggle relative numbers"})
 
+-- toggle spelling
+vim.api.nvim_set_keymap("n", "<leader>p", "<cmd>set spell!<cr>", {desc = "Toggle spell checker"})
 
 -- clear search
-vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>")
+vim.keymap.set("n", "<leader>h", "<cmd>nohlsearch<CR>")
 
 -- yank to system clipboard
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
