@@ -36,7 +36,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require("lspconfig").lua_ls.setup {
 	on_attach = on_attach,
-	capabilities = capabilities,
+	-- capabilities = capabilities,
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -47,33 +47,34 @@ require("lspconfig").lua_ls.setup {
 }
 
 
--- require("lspconfig").intelephense.setup {
--- 	on_attach = attach_fn,
--- }
+require("lspconfig").intelephense.setup {
+}
 
 require("lspconfig").clangd.setup {
 	on_attach = on_attach,
-	capabilities = capabilities,
+	-- capabilities = capabilities,
 }
 
 require("lspconfig").bashls.setup {
-	on_attach = on_attach,
+	-- on_attach = on_attach,
 	-- capabilities = require("lspconfig").bashls.default_capabilities(),
 }
 
 require("lspconfig").pylsp.setup {
 	-- on_attach = attach_fn,
 	-- capabilities = require('pylsp').default_capabilities(),
-    settings = {
-        plugins = {
-            pylint = {
-                enabled = false,
-                ignore = {'E501', 'E231', 'E266'},
-            },
-            pycodestyle = {
-                enabled = false,
-                ignore = {'E501', 'E231', 'E266'},
-            }
-        }
-    }
+	settings = {
+		pylsp = {
+			plugins = {
+				pylint = {
+					-- enabled = false,
+					ignore = {'E501', 'E231', 'E266'},
+				},
+				pycodestyle = {
+					-- enabled = false,
+					ignore = {'E501', 'E231', 'E266'},
+				}
+			}
+		}
+	}
 }
