@@ -68,11 +68,11 @@ require("lspconfig").pylsp.setup {
 			plugins = {
 				pylint = {
 					-- enabled = false,
-					ignore = {'E501', 'E231', 'E266'},
+					ignore = {'E501', 'E231', 'E221', 'E241', 'E266'},
 				},
 				pycodestyle = {
 					-- enabled = false,
-					ignore = {'E501', 'E231', 'E266'},
+					ignore = {'E501', 'E231', 'E221', 'E241', 'E266'},
 				}
 			}
 		}
