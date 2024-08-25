@@ -9,8 +9,31 @@ return {
 		config = function()
 			vim.cmd("TSUpdate")
 			require'nvim-treesitter.configs'.setup {
+				auto_install = true,
+				sync_install = false,
+				ignore_install = {},
 				-- A list of parser names, or "all" (the five listed parsers should always be installed)
-				ensure_installed = { "c", "cpp", "lua", "php", "vim", "vimdoc", "query" },
+				ensure_installed = {
+					"bash",
+					"bitbake",
+					"c",
+					"comment",
+					"cpp",
+					"css",
+					"diff",
+					"doxygen",
+					"html",
+					"javascript",
+					"lua",
+					"make",
+					"php",
+					"python",
+					"query",
+					"vim",
+					"vimdoc",
+					"xml",
+				},
+				modules = {},
 				highlight = {
 					enable = true,
 					-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
