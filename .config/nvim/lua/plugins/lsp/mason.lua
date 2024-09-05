@@ -33,7 +33,7 @@ return {
 				"lua_ls",
 				"pylsp",
 				"svelte",
-				"tailwindcss",
+				-- "tailwindcss",
 			},
 		})
 
