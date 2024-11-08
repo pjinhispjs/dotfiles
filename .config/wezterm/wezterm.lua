@@ -1,5 +1,6 @@
 local wezterm = require 'wezterm'
 local config = {}
+local act = wezterm.action
 
 config.color_scheme = 'Everforest Dark (Gogh)'
 config.font = wezterm.font_with_fallback {'Fira Code', 'Victor Mono',}
@@ -29,6 +30,26 @@ config.keys = {
 			-- command = { args = { 'top' } },
 			-- size = { Percent = 50 },
 		},
+	},
+	{
+		key = 'H',
+		mods = 'CTRL|SHIFT',
+		action = act.ActivatePaneDirection 'Left',
+	},
+	{
+		key = 'L',
+		mods = 'CTRL|SHIFT',
+		action = act.ActivatePaneDirection 'Right',
+	},
+	{
+		key = 'K',
+		mods = 'CTRL|SHIFT',
+		action = act.ActivatePaneDirection 'Up',
+	},
+	{
+		key = 'J',
+		mods = 'CTRL|SHIFT',
+		action = act.ActivatePaneDirection 'Down',
 	},
 }
 
