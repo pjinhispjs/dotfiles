@@ -7,6 +7,20 @@ config.font = wezterm.font_with_fallback {'Fira Code', 'Victor Mono',}
 config.hide_mouse_cursor_when_typing = true
 config.window_background_opacity = 0.8
 
+-- Sanity
+config.audible_bell = "Disabled"
+
+config.visual_bell = {
+	fade_in_function = 'EaseIn',
+	fade_in_duration_ms = 100,
+	fade_out_function = 'EaseOut',
+	fade_out_duration_ms = 100,
+}
+
+config.colors = {
+	visual_bell = '#202020',
+}
+
 -- Window border and frame
 config.window_decorations = "NONE"
 config.hide_tab_bar_if_only_one_tab = true
