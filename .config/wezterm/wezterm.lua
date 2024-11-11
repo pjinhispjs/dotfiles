@@ -2,6 +2,7 @@ local wezterm = require 'wezterm'
 local config = {}
 local act = wezterm.action
 
+-- Color scheme
 config.color_scheme = 'Everforest Dark (Gogh)'
 config.font = wezterm.font_with_fallback {'Fira Code', 'Victor Mono',}
 config.hide_mouse_cursor_when_typing = true
@@ -25,6 +26,14 @@ config.colors = {
 config.window_decorations = "NONE"
 config.hide_tab_bar_if_only_one_tab = true
 
+config.window_padding = {
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
+}
+
+-- Key bindings
 config.keys = {
 	-- Horizontal split
 	{
