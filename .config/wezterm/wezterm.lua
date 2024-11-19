@@ -76,4 +76,20 @@ config.keys = {
 	},
 }
 
+-- Disable following links with simple click.
+config.mouse_bindings = {
+	-- Disable the default click behavior
+	{
+		event = { Up = { streak = 1, button = "Left"} },
+		mods = "NONE",
+		action = wezterm.action.DisableDefaultAssignment,
+	},
+	-- Ctrl-click will open the link under the mouse cursor
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.OpenLinkAtMouseCursor,
+	},
+}
+
 return config
