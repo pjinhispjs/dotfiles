@@ -55,6 +55,11 @@ config.keys = {
 		},
 	},
 	{
+		key = 'w',
+		mods = 'CTRL|SHIFT',
+		action = wezterm.action.CloseCurrentPane { confirm = true },
+	},
+	{
 		key = 'H',
 		mods = 'CTRL|SHIFT',
 		action = act.ActivatePaneDirection 'Left',
@@ -73,6 +78,15 @@ config.keys = {
 		key = 'J',
 		mods = 'CTRL|SHIFT',
 		action = act.ActivatePaneDirection 'Down',
+	},
+	{
+		key = 'p',
+		mods = 'CTRL|SHIFT',
+		action = wezterm.action.SplitPane {
+			direction = 'Down',
+			command = { args = { 'btop' } },
+			-- size = { Percent = 50 },
+		},
 	},
 }
 
