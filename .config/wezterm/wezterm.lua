@@ -10,6 +10,7 @@ config.window_background_opacity = 0.8
 
 -- Sanity
 config.audible_bell = "Disabled"
+config.warn_about_missing_glyphs = false
 
 config.visual_bell = {
 	fade_in_function = 'EaseIn',
