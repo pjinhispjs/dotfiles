@@ -21,7 +21,7 @@ return {
 				},
 				add_blank_line_at_top = false, -- Add a blank line at the top of the tree.
 				auto_clean_after_session_restore = false, -- Automatically clean up broken neo-tree buffers saved in sessions
-				close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+				close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 				default_source = "filesystem", -- you can choose a specific source `last` here which indicates the last used source
 				enable_diagnostics = true,
 				enable_git_status = true,
@@ -289,62 +289,62 @@ return {
 					},
 				},
 				renderers = {
-					directory = {
-						{ "indent" },
-						{ "icon" },
-						{ "current_filter" },
-						{
-							"container",
-							content = {
-								{ "name", zindex = 10 },
-								{
-									"symlink_target",
-									zindex = 10,
-									highlight = "NeoTreeSymbolicLinkTarget",
-								},
-								{ "clipboard", zindex = 10 },
-								{
-									"diagnostics",
-									errors_only = true,
-									zindex = 20,
-									align = "right",
-									hide_when_expanded = true,
-								},
-								{ "git_status", zindex = 10, align = "right", hide_when_expanded = true },
-								{ "file_size", zindex = 10, align = "right" },
-								{ "type", zindex = 10, align = "right" },
-								{ "last_modified", zindex = 10, align = "right" },
-								{ "created", zindex = 10, align = "right" },
-							},
-						},
-					},
-					file = {
-						{ "indent" },
-						{ "icon" },
-						{
-							"container",
-							content = {
-								{
-									"name",
-									zindex = 10,
-								},
-								{
-									"symlink_target",
-									zindex = 10,
-									highlight = "NeoTreeSymbolicLinkTarget",
-								},
-								{ "clipboard", zindex = 10 },
-								{ "bufnr", zindex = 10 },
-								{ "modified", zindex = 20, align = "right" },
-								{ "diagnostics", zindex = 20, align = "right" },
-								{ "git_status", zindex = 10, align = "right" },
-								{ "file_size", zindex = 10, align = "right" },
-								{ "type", zindex = 10, align = "right" },
-								{ "last_modified", zindex = 10, align = "right" },
-								{ "created", zindex = 10, align = "right" },
-							},
-						},
-					},
+					-- directory = {
+					-- 	{ "indent" },
+					-- 	{ "icon" },
+					-- 	{ "current_filter" },
+					-- 	{
+					-- 		"container",
+					-- 		content = {
+					-- 			{ "name", zindex = 10 },
+					-- 			{
+					-- 				"symlink_target",
+					-- 				zindex = 10,
+					-- 				highlight = "NeoTreeSymbolicLinkTarget",
+					-- 			},
+					-- 			{ "clipboard", zindex = 10 },
+					-- 			{
+					-- 				"diagnostics",
+					-- 				errors_only = true,
+					-- 				zindex = 20,
+					-- 				align = "right",
+					-- 				hide_when_expanded = true,
+					-- 			},
+					-- 			{ "git_status", zindex = 10, align = "right", hide_when_expanded = true },
+					-- 			{ "file_size", zindex = 10, align = "right" },
+					-- 			{ "type", zindex = 10, align = "right" },
+					-- 			{ "last_modified", zindex = 10, align = "right" },
+					-- 			{ "created", zindex = 10, align = "right" },
+					-- 		},
+					-- 	},
+					-- },
+					-- file = {
+					-- 	{ "indent" },
+					-- 	{ "icon" },
+					-- 	{
+					-- 		"container",
+					-- 		content = {
+					-- 			{
+					-- 				"name",
+					-- 				zindex = 10,
+					-- 			},
+					-- 			{
+					-- 				"symlink_target",
+					-- 				zindex = 10,
+					-- 				highlight = "NeoTreeSymbolicLinkTarget",
+					-- 			},
+					-- 			{ "clipboard", zindex = 10 },
+					-- 			{ "bufnr", zindex = 10 },
+					-- 			{ "modified", zindex = 20, align = "right" },
+					-- 			{ "diagnostics", zindex = 20, align = "right" },
+					-- 			{ "git_status", zindex = 10, align = "right" },
+					-- 			{ "file_size", zindex = 10, align = "right" },
+					-- 			{ "type", zindex = 10, align = "right" },
+					-- 			{ "last_modified", zindex = 10, align = "right" },
+					-- 			{ "created", zindex = 10, align = "right" },
+					-- 		},
+					-- 	},
+					-- },
 					message = {
 						{ "indent", with_markers = false },
 						{ "name", highlight = "NeoTreeMessage" },
