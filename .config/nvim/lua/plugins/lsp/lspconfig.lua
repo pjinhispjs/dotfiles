@@ -5,12 +5,13 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
-		{ "SmiteshP/nvim-navbuddy",
+		{
+			"hasansujon786/nvim-navbuddy",
 			dependencies = {
 				"SmiteshP/nvim-navic",
-				"MunifTanjim/nui.nvim"
+				"MunifTanjim/nui.nvim",
 			},
-			opts = { lsp = { auto_attach = true } }
+			opts = { lsp = { auto_attach = true } },
 		},
 	},
 	config = function()
