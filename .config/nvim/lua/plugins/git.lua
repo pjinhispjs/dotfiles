@@ -4,13 +4,16 @@ return {
 		"tpope/vim-fugitive",
 		config = function()
 			vim.api.nvim_set_keymap("", "<leader>gg", "<cmd>Git<cr>", { noremap = true, desc = "Git status" })
+			vim.api.nvim_set_keymap("", "<leader>gaa", "<cmd>Git add %<cr>", { noremap = true, desc = "Git add current file" })
+			vim.api.nvim_set_keymap("", "<leader>gap", "<cmd>Git add -p %<cr>", { noremap = true, desc = "Git add patch current file" })
+			vim.api.nvim_set_keymap("", "<leader>gcc", "<cmd>Git commit<cr>", { noremap = true, desc = "Git commit" })
+			vim.api.nvim_set_keymap("", "<leader>gca", "<cmd>Git commit --amend<cr>", { noremap = true, desc = "Git amend commit" })
 		end,
 	},
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			require("gitsigns").setup()
-			local wk = require("which-key")
 			vim.api.nvim_set_keymap(
 				"",
 				"<leader>gh",
