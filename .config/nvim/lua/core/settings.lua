@@ -1,7 +1,7 @@
 -- Reload the configuration
 function _G.ReloadConfig()
-	for name,_ in pairs(package.loaded) do
-		if name:match('^user') and not name:match('nvim-tree') then
+	for name, _ in pairs(package.loaded) do
+		if name:match("^user") and not name:match("nvim-tree") then
 			package.loaded[name] = nil
 		end
 	end
@@ -25,17 +25,17 @@ vim.opt.relativenumber = true
 
 -- show whitespace characters
 vim.opt.listchars = {
-	tab = '<=>',
-	space = '·',
+	tab = "<=>",
+	space = "·",
 }
 vim.opt.list = true
 
 vim.opt.cursorline = true
-vim.opt.colorcolumn="80"
+vim.opt.colorcolumn = "80,88"
 
 -- set tabs to 4 space
-vim.opt.tabstop=4
-vim.opt.shiftwidth=4
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- no swap
 vim.opt.swapfile = false
@@ -56,4 +56,4 @@ vim.opt.scrolloff = 4
 
 -- Searches are case sensitive except when using capital letters
 vim.opt.ignorecase = true
-vim.opt.smartcase  = true
+vim.opt.smartcase = true

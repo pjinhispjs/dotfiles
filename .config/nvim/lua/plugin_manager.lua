@@ -15,6 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 -- Load the lsp plugins from a separate folder.  I suspect they get loaded after
 -- the inital set of plugins.  For some reason this is required or the LSP never
 -- runs.
-require("lazy").setup({ { import = "plugins" }, { import = "plugins.lsp" } })
+require("lazy").setup({ { import = "plugins" }, --[[ { import = "lsp" } ]] })
 
 vim.api.nvim_set_keymap("", "<leader>l", "<Cmd>Lazy<CR>", {noremap = true, silent = false, expr = false})

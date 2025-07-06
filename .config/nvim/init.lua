@@ -4,6 +4,8 @@ require("core.settings")
 -- General keymaps ----------------------------------------------
 require("core.keybinds")
 
+require("core.lsp")
+require("core.autocmds")
 
 -- Plugins via lazy.nvim -----------------------------------------
 require("plugin_manager")
