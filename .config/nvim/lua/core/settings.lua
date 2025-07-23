@@ -25,7 +25,7 @@ vim.opt.relativenumber = true
 
 -- show whitespace characters
 vim.opt.listchars = {
-	tab = "<=>",
+	tab = "╞═",
 	space = "·",
 }
 vim.opt.list = true
