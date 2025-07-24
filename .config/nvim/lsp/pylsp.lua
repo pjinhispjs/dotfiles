@@ -1,5 +1,14 @@
 return {
 	cmd = { "lua-language-server" },
 	filetypes = { "python" },
-	settings = {},
+	settings = {
+		pylsp = {
+			plugins = {
+				pycodestyle = {
+					ignore = { "W503" },
+					maxLineLength = 88,
+				},
+			},
+		},
+	},
 }
