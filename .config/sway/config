@@ -27,7 +27,11 @@ include /etc/sway/config-vars.d/*
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/pj/Pictures/wallpaper/wp6689716-desktop-4k-forest-way-wallpapers.jpg fill
+output 'Acer Technologies XV340CK P T5Y000013E00' pos 0 1024
+# 3440 / 2 + 1280 / 2
+output 'Dell Inc. DELL P1917S 9PX3G7CN1QTB' pos 1080 0
+output * bg /home/pj/Pictures/wallpaper/green-leaves-plant-1072179.jpg fill
+
 #
 # Example configuration:
 #
@@ -41,7 +45,7 @@ output * bg /home/pj/Pictures/wallpaper/wp6689716-desktop-4k-forest-way-wallpape
 #
 #          timeout 300 'swaylock -f -c 000000' \
 exec swayidle -w \
-timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+	timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -180,7 +184,7 @@ bindsym $mod+v splitv
 
 # Switch the current container between different layout styles
 # bindsym $mod+s layout stacking
-# bindsym $mod+w la hut tabbed
+bindsym $mod+g la hut tabbed
 bindsym $mod+t layout toggle split
 
 # Make the current focus fullscreen
@@ -248,7 +252,8 @@ client.focused_inactive #2b3339 #2b3339 #2b3339 #2b3339 #2b3339
 client.unfocused        #2b3339 #2b3339 #2b3339 #2b3339 #2b3339
 client.focused          #d4be98 #d4be98 #d4be98 #d4be98 #d4be98
 
-gaps inner 10
+smart_gaps on
+gaps inner 5
 #
 # Status Bar:
 #
@@ -258,7 +263,7 @@ bar {
 
 # When the status_command prints a new line to stdout, swaybar updates.
 # The default just shows the current date and time.
-	status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+	status_command while date +'%Y-%m-%d %I:%M:%S %p '; do sleep 1; done
 
 	colors {
 		statusline #ffffff
