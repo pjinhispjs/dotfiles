@@ -20,6 +20,9 @@ return {
 				userThirdParty = { os.getenv("HOME") .. ".local/share/LuaAddons" },
 				checkThirdParty = "Apply",
 			},
+			diagnostics = {
+				globals = { "vim" }, -- Recognize 'vim' as a global variable
+			},
 		},
 	},
 }
