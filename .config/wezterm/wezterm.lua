@@ -24,7 +24,7 @@ config.colors = {
 }
 
 -- Window border and frame
-config.window_decorations = "NONE"
+-- config.window_decorations = "NONE"
 config.hide_tab_bar_if_only_one_tab = true
 
 config.window_padding = {
