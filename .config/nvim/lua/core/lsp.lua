@@ -29,3 +29,6 @@ vim.diagnostic.config({
 		},
 	},
 })
+
+vim.api.nvim_set_keymap("n", "<leader>jj", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next LSP error" })
+vim.api.nvim_set_keymap("n", "<leader>kk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Previous LSP error" })
