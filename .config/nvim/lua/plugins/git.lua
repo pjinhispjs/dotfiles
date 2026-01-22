@@ -32,6 +32,8 @@ return {
 				"<cmd>Gitsigns blame_line<cr>",
 				{ noremap = true, desc = "Git blame" }
 			)
+			vim.api.nvim_set_keymap("", "<leader>j", "<cmd>Gitsigns next_hunk<cr>", { noremap = true, desc = "Next hunk" })
+			vim.api.nvim_set_keymap("", "<leader>k", "<cmd>Gitsigns prev_hunk<cr>", { noremap = true, desc = "Previous hunk" })
 		end,
 	},
 }
