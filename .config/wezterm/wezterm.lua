@@ -3,10 +3,12 @@ local config = {}
 local act = wezterm.action
 
 -- Color scheme
-config.color_scheme = "Everforest Dark (Gogh)"
+-- config.color_scheme = "Everforest Dark (Gogh)"
+config.color_scheme = "GruvboxDarkHard"
+
 config.font = wezterm.font_with_fallback({ "CommitMono", "Fira Code", "Victor Mono" })
 config.hide_mouse_cursor_when_typing = true
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.9
 
 -- Sanity
 config.audible_bell = "Disabled"
