@@ -8,7 +8,8 @@ config.color_scheme = "GruvboxDarkHard"
 
 config.font = wezterm.font_with_fallback({ "CommitMono", "Fira Code", "Victor Mono" })
 config.hide_mouse_cursor_when_typing = true
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.8
+config.initial_cols = 100
 
 -- Sanity
 config.audible_bell = "Disabled"
