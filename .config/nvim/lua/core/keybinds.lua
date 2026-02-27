@@ -49,6 +49,10 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 -- dragon-drop the current file
 vim.keymap.set("n", "<leader>fy", "<cmd>! dragon-drop --and-exit %<cr>")
 
+-- add semicolon to the end of the line and then return
+vim.keymap.set("n", "<C-;>", "A;<Esc>o<Esc>")
+vim.keymap.set("i", "<C-;>", "<Esc>A;<Esc>")
+
 -- Shamelessly stolen from ThePrimeagen --
 -- move lines of text like Sublime's ctrl+shift+arrowkeys
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
