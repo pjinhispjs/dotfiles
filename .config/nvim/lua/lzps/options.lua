@@ -2,6 +2,10 @@
 vim.opt.expandtab = true
 vim.opt.colorcolumn = "72,80,88"
 
+-- set tabs to 4 space
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+
 -- vim.api.nvim_create_autocmd("Filetype", "cpp setlocal commentstring=// %s")
 function LZCopyright()
 	-- if there is a shebang, offset the notice by 1 line
@@ -27,6 +31,6 @@ function LZCopyright()
 	if vim.bo.filetype == "cpp" or vim.bo.filetype == "c" then
 		comment = "// %s"
 	end
-	local copyright = { string.format(comment, "Copyright " .. year .. " LayerZero Power Systems, Inc.") }
+	local copyright = { string.format(comment, "Copyright " .. year .. " LayerZero Power Systems, LLC") }
 	vim.api.nvim_buf_set_lines(0, first_line, first_line + replace, true, copyright)
 end

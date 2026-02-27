@@ -33,9 +33,9 @@ vim.opt.list = true
 vim.opt.cursorline = true
 vim.opt.colorcolumn = "80,88"
 
--- set tabs to 4 space
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+-- set tabs to 2 space
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 
 -- no swap
 vim.opt.swapfile = false
