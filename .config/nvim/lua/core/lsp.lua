@@ -5,6 +5,7 @@ vim.lsp.enable({
 	"html",
 	"lua_ls",
 	"pylsp",
+	"verible",
 })
 
 vim.diagnostic.config({
