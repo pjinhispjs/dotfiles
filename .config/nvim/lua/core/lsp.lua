@@ -1,6 +1,7 @@
 vim.lsp.enable({
 	"clangd",
 	"cssls",
+	"gdscript",
 	"html",
 	"lua_ls",
 	"pylsp",
