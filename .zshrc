@@ -78,7 +78,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # NOTE zsh-syntax-highlighting must be sourced last
-plugins=(git alias-finder pj command-not-found)
+# git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+plugins=(git alias-finder pj command-not-found zsh-autosuggestions fzf-tab)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,6 +118,7 @@ alias cls='clear'
 alias gh='git log HEAD~1..HEAD --pretty=format:%H'
 alias vim="nvim"
 # alias ssh='alacritty -e ssh'
+
 
 # Definition for pj (project jump) plugin
 PROJECT_PATHS=(~/Software /media/pj/SSD1/devel /media/pj/SSD/devel ~/devel)
