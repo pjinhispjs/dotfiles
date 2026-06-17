@@ -1,52 +1,91 @@
 -- https://github.com/ThePrimeagen/refactoring.nvim
 return {
-	{ "ThePrimeagen/refactoring.nvim",
-		dependencies = {
-			{"nvim-lua/plenary.nvim"},
-			{"nvim-treesitter/nvim-treesitter"},
-		},
-		config = function ()
-			-- load refactoring Telescope extension
-			require("telescope").load_extension("refactoring")
-
-
-			-- Remaps for the refactoring operations currently offered by the plugin
-			local opts = {noremap = true, silent = true, expr = false}
-			vim.api.nvim_set_keymap("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], opts)
-			vim.api.nvim_set_keymap("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], opts)
-			vim.api.nvim_set_keymap("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], opts)
-			vim.api.nvim_set_keymap("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], opts)
-
-			-- Extract block doesn't need visual mode
-			vim.api.nvim_set_keymap("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], opts)
-			vim.api.nvim_set_keymap("n", "<leader>rbf", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], opts)
-
-			-- Inline variable can also pick up the identifier currently under the cursor without visual mode
-			vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], opts)
-			-- load refactoring Telescope extension
-			require("telescope").load_extension("refactoring")
-
-			-- remap to open the Telescope refactoring menu in visual mode
-			vim.api.nvim_set_keymap(
-				"v",
-				"<leader>rr",
-				"<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
-				{ noremap = true }
-			)
-
-		end,
-		-- keys = {
-			-- -- Remaps for the refactoring operations currently offered by the plugin
-			-- {"<leader>re", function () require('refactoring').refactor('Extract Function') end, mode="v", desc = "Extract function" },
-			-- {"<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], "v",  {noremap = true, silent = true, expr = false}},
-			-- {"<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], "v",  {noremap = true, silent = true, expr = false}},
-			-- {"<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "v",  {noremap = true, silent = true, expr = false}},
-			-- -- Extract block doesn't need visual mode
-			-- {"<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], "n",  {noremap = true, silent = true, expr = false}},
-			-- {"<leader>rbf", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], "n",  {noremap = true, silent = true, expr = false}},
-			-- -- Inline variable can also pick up the identifier currently under the cursor without visual mode
-			-- {"<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "n",  {noremap = true, silent = true, expr = false}},
-		-- }
+	"ThePrimeagen/refactoring.nvim",
+	dependencies = {
+		"lewis6991/async.nvim",
 	},
+	config = function()
+		local keymap = vim.keymap
 
+		keymap.set({ "n", "x" }, "<leader>rf", function()
+			-- this keymap doesn't select any textobject by default, so you may need to provide one each time you use it.
+			require("refactoring").select_refactor()
+		end, { desc = "Select refactor" })
+
+		keymap.set({ "n", "x" }, "<leader>re", function()
+			return require("refactoring").extract_func()
+		end, { desc = "Extract Function", expr = true })
+		-- `_` is the default textobject for "current line"
+		keymap.set("n", "<leader>ree", function()
+			return require("refactoring").extract_func() .. "_"
+		end, { desc = "Extract Function (line)", expr = true })
+
+		keymap.set({ "n", "x" }, "<leader>rE", function()
+			return require("refactoring").extract_func_to_file()
+		end, { desc = "Extract Function To File", expr = true })
+
+		keymap.set({ "n", "x" }, "<leader>rv", function()
+			return require("refactoring").extract_var()
+		end, { desc = "Extract Variable", expr = true })
+
+		-- `_` is the default textobject for "current line"
+		keymap.set("n", "<leader>rvv", function()
+			return require("refactoring").extract_var() .. "_"
+		end, { desc = "Extract Variable (line)", expr = true })
+
+		keymap.set({ "n", "x" }, "<leader>ri", function()
+			return require("refactoring").inline_var()
+		end, { desc = "Inline Variable", expr = true })
+		keymap.set({ "n", "x" }, "<leader>rI", function()
+			return require("refactoring").inline_func()
+		end, { desc = "Inline function", expr = true })
+
+		-- `iw` is the builtin textobject for "in word". You can use any other textobject or even create the keymap without any textobject if you prefer to provide one yourself each time that you use the keymap
+		keymap.set("n", "<leader>pv", function()
+			return require("refactoring.debug").print_var({ output_location = "below" }) .. "iw"
+		end, { desc = "Debug print var below", expr = true })
+		keymap.set("x", "<leader>pv", function()
+			return require("refactoring.debug").print_var({ output_location = "below" })
+		end, { desc = "Debug print var below", expr = true })
+
+		-- `iw` is the builtin textobject for "in word". You can use any other textobject or even create the keymap without any textobject if you prefer to provide one yourself each time that you use the keymap
+		keymap.set("n", "<leader>pV", function()
+			return require("refactoring.debug").print_var({ output_location = "above" }) .. "iw"
+		end, { desc = "Debug print var above", expr = true })
+		keymap.set("x", "<leader>pV", function()
+			return require("refactoring.debug").print_var({ output_location = "above" })
+		end, { desc = "Debug print var above", expr = true })
+
+		keymap.set({ "x", "n" }, "<leader>pe", function()
+			return require("refactoring.debug").print_exp({ output_location = "below" })
+		end, { desc = "Debug print exp below", expr = true })
+		-- `_` is the default textobject for "current line"
+		keymap.set("n", "<leader>pee", function()
+			return require("refactoring.debug").print_exp({ output_location = "below" }) .. "_"
+		end, { desc = "Debug print exp below", expr = true })
+
+		keymap.set({ "x", "n" }, "<leader>pE", function()
+			return require("refactoring.debug").print_exp({ output_location = "above" })
+		end, { desc = "Debug print exp above", expr = true })
+		-- `_` is the default textobject for "current line"
+		keymap.set("n", "<leader>pEE", function()
+			return require("refactoring.debug").print_exp({ output_location = "above" }) .. "_"
+		end, { desc = "Debug print exp above", expr = true })
+
+		keymap.set("n", "<leader>pP", function()
+			return require("refactoring.debug").print_loc({ output_location = "above" })
+		end, { desc = "Debug print location", expr = true })
+		keymap.set("n", "<leader>pp", function()
+			return require("refactoring.debug").print_loc({ output_location = "below" })
+		end, { desc = "Debug print location", expr = true })
+
+		keymap.set({ "x", "n" }, "<leader>pc", function()
+			-- `ag` is a custom textobject that selects the whole buffer. It's provided by plugins like `mini.ai` (requires manual configuration using `MiniExtra.gen_ai_spec.buffer()`).
+			-- return require("refactoring.debug").cleanup { restore_view = true } .. "ag"
+
+			-- this keymap doesn't select any textobject by default, so you need to provide one each time you use it.
+			return require("refactoring.debug").cleanup({ restore_view = true })
+		end, { desc = "Debug print clean", expr = true, remap = true })
+	end,
+	lazy = false,
 }
