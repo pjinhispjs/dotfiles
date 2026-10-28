@@ -84,13 +84,12 @@ config.keys = {
 		action = act.ActivatePaneDirection("Down"),
 	},
 	{
+		-- "pop" the current split to a new window
 		key = "p",
 		mods = "CTRL|SHIFT",
-		action = wezterm.action.SplitPane({
-			direction = "Down",
-			command = { args = { "btop" } },
-			-- size = { Percent = 50 },
-		}),
+		action = wezterm.action_callback(function(win, pane)
+			local tab, window = pane:move_to_new_window()
+		end),
 	},
 }
 
